@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class InitialSceneController : MonoBehaviour {
 
@@ -8,10 +9,7 @@ public class InitialSceneController : MonoBehaviour {
         audioInitial.Stop();
         //StartCoroutine(TransitionToNewScene());
     }
-
-	public IEnumerator TransitionToNewScene(){
-        float fadeTime = GameObject.Find("_GM").GetComponent<Fading>().BeginFade(1);
-        yield return new WaitForSeconds(1.0f);
-        Application.LoadLevel("SeleccionPeriodo");
-    }
+	public void moveToSelection(){
+		SceneManager.LoadScene("SeleccionPeriodo");
+	}
 }

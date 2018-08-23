@@ -8,11 +8,12 @@ public class PeriodController : MonoBehaviour {
     public Button btnNext;
     public Button btnPrevious;
 
+	public GameObject aboutFrame;
     public GameObject map;
 	public Sprite[] mapSprites;
-    public Image infoImage;
     public GameObject[] periods;
     public GameObject[] infoPeriods;
+	public AboutUsController auc;
     string[] periodNames = new string[] { "Preclásico", "Clásico", "Posclásico" };
     int currentPeriod;
     bool infoActive = false;
@@ -20,6 +21,7 @@ public class PeriodController : MonoBehaviour {
     private void Start () {
         currentPeriod = PlayerPrefs.GetInt("CurrentPeriod",0);
 		map.GetComponent<SpriteRenderer> ().sprite = mapSprites[currentPeriod];
+		auc = txtPeriod.GetComponent<AboutUsController> ();
         setValues();
 	}
 
@@ -48,6 +50,8 @@ public class PeriodController : MonoBehaviour {
     }
 
 	public void changePeriod(int increment){
+		aboutFrame.SetActive (false);
+		auc.isShowing = false;
         currentPeriod += increment;
         if (currentPeriod >= 0 && currentPeriod < periodNames.Length) setValues();
         if (currentPeriod < 0) currentPeriod = 0;
